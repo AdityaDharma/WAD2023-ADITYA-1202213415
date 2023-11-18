@@ -15,10 +15,8 @@
             include("connect.php");
 
             // Buatlah query untuk mengambil data dari database (gunakan query SELECT)
-            $query = "SELECT * FROM showroom_mobil";
-            // $result = $connection -> query($query);
-            
-            
+
+            $query = mysqli_query($connection, "SELECT * FROM showroom_mobil");
 
             // Buatlah perkondisian dimana: 
             // 1. a. Apabila ada data dalam database, maka outputnya adalah semua data dalam database akan ditampilkan dalam bentuk tabel 
@@ -28,27 +26,33 @@
             // 2. Apabila tidak ada data dalam database, maka outputnya adalah pesan 'tidak ada data dalam tabel'
 
             //<!--  **********************  1  **************************     -->
-            if ($result = mysqli_query($connection,$query)){
+            if ($query -> num_rows > 0 ){
                 echo "<table border='1'>
-                    <tr>
-                    <th>id</th>
-                    <th>Nama Mobil</th>
-                    <th>Brand Mobil</th>
-                    <th>Warna Mobil</th>
-                    <th>Tipe Mobil</th>
-                    <th>Harga Mobil</th>";
-            }
+                        <tr>
+                            <th>id</th>
+                            <th>Nama Mobil</th>
+                            <th>Brand Mobil</th>
+                            <th>Warna Mobil</th>
+                            <th>Tipe Mobil</th>
+                            <th>Harga Mobil</th>
+                            <th>Detail Mobil</th>
+                        </tr>";
+            
                 while($pilih = mysqli_fetch_assoc($query)){
-                    echo "
-                    <tr>";
-                        "<td>".$pilih['id']."</td>";
-                        "<td>".$pilih['nama_mobil']."</td>";
-                        "<td>".$pilih['id']."</td>";
-                        "<td>".$pilih['id']."</td>";
-                        "<td>".$pilih['id']."</td>";
-                        "<td>".$pilih['id']."</td>";
-                    "</tr>";
+                    echo "<tr>
+                            <td>".$pilih['id']."</td>
+                            <td>".$pilih['nama_mobil']."</td>
+                            <td>".$pilih['brand_mobil']."</td>
+                            <td>".$pilih['warna_mobil']."</td>
+                            <td>".$pilih['tipe_mobil']."</td>
+                            <td>".$pilih['harga_mobil']."</td>
+                            <td><a href= 'form_detail_mobil.php?id=". $pilih["id"]."'>Detail Mobil</a></td>
+                        </tr>";
                 }
+                echo "</table>";
+            }else{
+                echo "tidak ada data dalam tabel";
+            }
            
             
 
