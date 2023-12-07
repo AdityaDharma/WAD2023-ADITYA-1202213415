@@ -40,7 +40,7 @@ if (isset($_SESSION['login'])) {
                         <!-- ----------  Letakkan Kode di bawah ini  ----------- -->
                         <?php if (!isset($_SESSION['login'])){ ?>
                             <h2 class= "text-center mb-3">Login</h2>
-                            <?php if(isset($_SESSION['message'])) and isset($_SESSION['color']){ ?>
+                            <?php if(isset($_SESSION['message']))  isset($_SESSION['color']){ ?>
                             <div class="alert alert-<?=$_SESSION['color']?>" role="alert">
                                 <?= $_SESSION['message'] ?></div>
                             <?php unset($_SESSION['message']);
